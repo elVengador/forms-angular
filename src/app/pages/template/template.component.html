@@ -1,0 +1,86 @@
+<h4>Formularios <small> Template </small></h4>
+<hr>
+<form autocomplete="off" (ngSubmit)="save( form )" #form="ngForm">
+
+    <div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Nombre</label>
+            <div class="col-8">
+
+                <input class        = "form-control"
+                       type         = "text"
+                       name         = "nombre"
+                       placeholder  = "Nombre"
+                       [ngClass]    = "{'is-invalid': nombre.invalid && (nombre.touched || form.submitted)}"
+                       [ngModel]    = "usuario.nombre"
+                       required
+                       minlength    = "2"
+                       #nombre      = "ngModel">
+                <div *ngIf="nombre.invalid && (nombre.touched || form.submitted)" class="form-text text-danger">Ingrese 2 letras</div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Apellido</label>
+            <div class="col-8">
+
+                <input class="form-control"
+                       type="text" 
+                       name="apellidos"
+                       placeholder="Apellidos"
+                       [ngClass]="{'is-invalid': apellidos.invalid && (apellidos.touched || form.submitted)}"
+                       [ngModel] = "usuario.apellidos"
+                       required
+                       minlength="2"
+                       #apellidos="ngModel">
+                <div *ngIf="apellidos.invalid && (apellidos.touched || form.submitted)" class="form-text text-danger">Ingrese 2 letras</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Correo</label>
+        <div class="col-8">
+
+            <input class="form-control"
+                   type="email" 
+                   name="email"
+                   placeholder="Correo electrónico"
+                   [ngClass]="{'is-invalid': email.invalid && (email.touched || form.submitted)}"
+                   [ngModel] = "usuario.email"
+                   required
+                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                   #email="ngModel">
+            <div *ngIf="email.invalid && (email.touched || form.submitted)" class="form-text text-danger">Ingrese 5 letras</div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Correo</label>
+        <div class="col-8">
+            <select class="form-control" 
+                name="pais" 
+                [ngClass]="{'is-invalid': pais.invalid && (pais.touched || form.submitted)}"
+                [disabled]="paises.length === 0"
+                [ngModel]="usuario.pais"
+                required
+                #pais="ngModel">
+                <option *ngFor="let pais of paises" value="{{pais.code}}">{{pais.name}}</option>
+            </select>
+            <div *ngIf="pais.invalid && (pais.touched || form.submitted)" class="form-text text-danger">Ingrese 5 letras</div>
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">&nbsp;</label>
+        <div class="input-group col-md-8">
+            <button type="submit" class="btn btn-outline-primary btn-block">
+                Guardar
+            </button>
+        </div>
+    </div>
+
+</form>
